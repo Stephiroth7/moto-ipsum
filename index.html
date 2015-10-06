@@ -106,46 +106,76 @@ function Shuffler(o){
     return o;
 };
 
-
-
-
-
-
 function Ipsify(){
+	
 
 	var finalArray = [];
 	var finalString = "";
 	var paraSizes = [Randomizer(6,10), Randomizer(10, 14), Randomizer(14, 18)]
 	var size = 1;
 	var radioSize = [document.getElementById("small"), document.getElementById("medium"), document.getElementById("large")];
-
-	if(radioSize[0].checked)
-		{size = paraSizes[0];}
-	if(radioSize[1].checked)
-		{size = paraSizes[1];}
-	if(radioSize[2].checked)
-		{size = paraSizes[2];}
-
-	for( var i = 0; i < size; i++){
-		var result = Shuffler(bothWords).join(" "); //removes commas from result and turns into string
-		var sentenceLength = Randomizer(6,12);
-		var arr = result.split(" ", sentenceLength); 
-		var lastArr1 = arr.pop().concat(".")
-		arr.push(lastArr1);
-		var firstArr1 = arr.shift();
-		firstArr1 = capFirst(firstArr1);
-		arr.unshift(firstArr1);
-		finalArray[i] = arr.join(" ");//arr is now a sentence!
-		 
-	}
-	finalString = finalArray.join(" ");
-
 	var radioTrue = document.getElementById("true");
-	if(radioTrue.checked)
-		{finalString = motoIps + finalString;}
+	var repeat;
+	var repeatedArray = [];
+	var repeatedString = "";
+
+	var returned = document.getElementById("returned");
+
+	var repeatNode = document.getElementsByClassName("numberGroup");
+	for(x = 0; x < repeatNode.length; x ++){
+		if(repeatNode[x].checked){
+			repeat = repeatNode[x].value;
+			console.log(repeat);
+		}
+	}
+
+		if(radioSize[0].checked)
+			{size = paraSizes[0];}
+		if(radioSize[1].checked)
+			{size = paraSizes[1];}
+		if(radioSize[2].checked)
+			{size = paraSizes[2];}
+	// debugger;
+	for(var y = 0; y <repeat; y++){
+		for( var i = 0; i < size; i++){
+			var result = Shuffler(bothWords).join(" "); //removes commas from result and turns into string
+			var sentenceLength = Randomizer(6,12);
+			var arr = result.split(" ", sentenceLength); 
+			var lastArr1 = arr.pop().concat(".")
+			arr.push(lastArr1);
+			var firstArr1 = arr.shift();
+			firstArr1 = capFirst(firstArr1);
+			arr.unshift(firstArr1);
+			finalArray[i] = arr.join(" ");//arr is now a sentence!
+			 
+		}
+		finalString = finalArray.join(" ");
+		repeatedArray[y] = finalString;
+
+		repeatedString = repeatedArray.join("");
+
+
+//html manipulation
+		var div = document.createElement("div");
+		var stringNode = document.createTextNode(finalString)
+		div.appendChild(stringNode);
+		returned.appendChild(div);
+	}
+//check to begin with Motorcycle Ipsum
+		if(radioTrue.checked){
+			var first = returned.firstChild;
+			first.innerText = motoIps + first.innerText;
+			console.log(first.innerText);
+		}
+
 	
+
+	// console.log(repeatedString.length);
+	// var charString = repeatedString.substr(0,1100);
+	// console.log(charString.length + "   "  + charString);
+
 	
-	return document.getElementById("returned").innerHTML =  finalString;
+	return returned;
 }
 </script>
 </head>
@@ -155,8 +185,10 @@ function Ipsify(){
 <form id="form" action="">
 	Select to start with "Motorcycle lorem ipsum"<input type="radio"  id="true" value="true" checked="checked" name="startGroup">yes<input type="radio" id="false" value="false" name="startGroup">no<br/>
 	Select small, medium, or large paragraphs.<input type="radio"  id="small" value="small" name="sizeGroup">small<input type="radio" id="medium" value="medium" checked="checked" name="sizeGroup">medium<input type="radio" id="large" value="large" name="sizeGroup">large<br/>
+	How many paragraphs do you want?<input type ="radio" class="numberGroup" value="1" checked="checked" name="numberGroup">1<input type ="radio" class="numberGroup" value="2" name="numberGroup">2<input type ="radio" class="numberGroup" value="3" name="numberGroup">3<input type ="radio" class="numberGroup" value="4" name="numberGroup">4<input type ="radio" class="numberGroup" value="5" name="numberGroup">5<br/>
 	<input type="button" value="ClickMe!" onclick="Ipsify()">
 </form>
 <div id="returned"></div>
+<div id="charCounted"></div>
 </body>
 </html>
