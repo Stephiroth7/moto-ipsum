@@ -120,6 +120,7 @@ function Ipsify(){
 	var repeatedString = "";
 
 	var returned = document.getElementById("returned");
+	var charCounted = document.getElementById("charCounted");
 
 	var repeatNode = document.getElementsByClassName("numberGroup");
 	for(x = 0; x < repeatNode.length; x ++){
@@ -156,10 +157,19 @@ function Ipsify(){
 
 
 //html manipulation
-		var div = document.createElement("div");
+		var stringCountH3 = document.createElement("H3");
+		var stringCount = finalString.length;
+		var divString = document.createElement("div");
+		var divCount = document.createElement("div");
+
+		var countNode = document.createTextNode(stringCount);
 		var stringNode = document.createTextNode(finalString)
-		div.appendChild(stringNode);
-		returned.appendChild(div);
+		
+		divString.appendChild(stringNode);
+		returned.appendChild(divString);
+		stringCountH3.textContent = "Character Count:";
+		charCounted.appendChild(stringCountH3);
+		charCounted.appendChild(countNode);
 	}
 //check to begin with Motorcycle Ipsum
 		if(radioTrue.checked){
