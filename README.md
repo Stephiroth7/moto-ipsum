@@ -15,4 +15,8 @@ TODO:
 
 Basic testing info:
 * 255 chars for text fields
+<<<<<<< HEAD
 * 2147483647 for 32-bit ints
+=======
+* 2147483647 for 32-bit ints
+>>>>>>> bfb98f581e4017c3c022c2c9d520b67c95148acc
