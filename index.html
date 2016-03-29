@@ -44,8 +44,10 @@ var fastWords = [
 "fairings",
 "race",
 "Brembo",
-"Öhlins",
+"suspension",
+"Ceriano",
 "Penske",
+"fuel injected",
 "octane",
 "MotoGP",
 "Moto2",
@@ -80,8 +82,7 @@ var ipsumWords = [
 "at vero eos",
 "necessitatibus saepe eveniet"];
 
-//var fastCount = fastWords.length;
-//var ipsumCount = ipsumWords.length;
+
 var bothWords = ipsumWords.concat(fastWords);
 
 //capitalize first letter of string.
@@ -105,6 +106,7 @@ function Shuffler(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };
+
 
 function Ipsify(){
 	
@@ -136,7 +138,7 @@ function Ipsify(){
 			{size = paraSizes[1];}
 		if(radioSize[2].checked)
 			{size = paraSizes[2];}
-	// debugger;
+	 //debugger;
 	for(var y = 0; y <repeat; y++){
 		for( var i = 0; i < size; i++){
 			var result = Shuffler(bothWords).join(" "); //removes commas from result and turns into string
@@ -155,36 +157,32 @@ function Ipsify(){
 
 		repeatedString = repeatedArray.join("");
 
-
 //html manipulation
-		var stringCountH3 = document.createElement("H3");
-		var stringCount = finalString.length;
 		var divString = document.createElement("div");
-		var divCount = document.createElement("div");
+		
 
-		var countNode = document.createTextNode(stringCount);
 		var stringNode = document.createTextNode(finalString)
 		
 		divString.appendChild(stringNode);
 		returned.appendChild(divString);
-		stringCountH3.textContent = "Character Count:";
-		charCounted.appendChild(stringCountH3);
-		charCounted.appendChild(countNode);
+		
 	}
 //check to begin with Motorcycle Ipsum
+
 		if(radioTrue.checked){
 			var first = returned.firstChild;
-			first.innerText = motoIps + first.innerText;
-			console.log(first.innerText);
+			var firstText = first.innerHTML;
+			first.innerHTML = motoIps + firstText;
+
+
 		}
+		debugger;
+		var stringCountH3 = document.createElement("H3");
+		var divCount = document.createElement("div");
+		var countNode = document.createTextNode(stringCountH3);
+		stringCountH3.textContent = "Character Count: " + returned.textContent.length;
+		charCounted.appendChild(stringCountH3);
 
-	
-
-	// console.log(repeatedString.length);
-	// var charString = repeatedString.substr(0,1100);
-	// console.log(charString.length + "   "  + charString);
-
-	
 	return returned;
 }
 </script>
