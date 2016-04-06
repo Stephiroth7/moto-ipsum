@@ -107,9 +107,18 @@ function Shuffler(o){
     return o;
 };
 
+function CharCount(returnedString){
+
+	var stringCountH3 = document.createElement("H3");
+	var divCount = document.createElement("div");
+	stringCountH3.textContent = "Character Count: " + returnedString.textContent.length;
+	charCounted.appendChild(stringCountH3);
+}
+
 
 function Ipsify(){
-	
+	debugger;
+
 
 	var finalArray = [];
 	var finalString = "";
@@ -121,8 +130,11 @@ function Ipsify(){
 	var repeatedArray = [];
 	var repeatedString = "";
 
+//set text to empty 
 	var returned = document.getElementById("returned");
+	returned.textContent = "";
 	var charCounted = document.getElementById("charCounted");
+	charCounted.textContent = "";
 
 	var repeatNode = document.getElementsByClassName("numberGroup");
 	for(x = 0; x < repeatNode.length; x ++){
@@ -173,17 +185,11 @@ function Ipsify(){
 			var first = returned.firstChild;
 			var firstText = first.innerHTML;
 			first.innerHTML = motoIps + firstText;
-
-
 		}
-		debugger;
-		var stringCountH3 = document.createElement("H3");
-		var divCount = document.createElement("div");
-		var countNode = document.createTextNode(stringCountH3);
-		stringCountH3.textContent = "Character Count: " + returned.textContent.length;
-		charCounted.appendChild(stringCountH3);
+	
 
-	return returned;
+	//make character count html
+	CharCount(returned);
 }
 </script>
 </head>
